@@ -7,6 +7,7 @@ interface Props {
 }
 
 export default function Home(props: Props) {
+	const test = "ads"
 	return (
 		<>
 			<Head>
