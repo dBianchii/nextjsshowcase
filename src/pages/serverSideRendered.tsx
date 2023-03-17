@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
-import { GetStaticProps } from "next"
+import { GetServerSideProps } from "next"
 
 interface Props {
 	data: NewsAPIData
@@ -25,10 +25,10 @@ export default function Home(props: Props) {
 					<h2 className="text-5xl text-center">
 						This is a{" "}
 						<span className="before:block before:absolute before:-inset-1 before:-skew-y-1 before:bg-pink-500 relative inline-block">
-							<span className="relative text-white">Staticly Generated Page!</span>
+							<span className="relative text-white">Server Side Rendered Page!</span>
 						</span>
 					</h2>
-					<h2>or SGP</h2>
+					<h2>or SSR</h2>
 					<p>{props.data.articles[0].author}</p>
 					{/* 
 						If you run this app in development mode, every time you refresh the page, getStaticProps() will run on the server. 
@@ -90,7 +90,7 @@ interface NewsAPIData {
 //This function is called at build time on server-side.
 //It won't be called on client-side, and won't be included in the JS bundle for the browser.
 //So you can write code such as direct database queries without them being sent to browsers.
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const res = await fetch(`https://newsapi.org/v2/everything?q=culinary&apiKey=c8ad2ed013844c9db3b72f5441606385`)
 	const data: NewsAPIData = await res.json()
 	data.articles = data.articles.slice(0, 6)
